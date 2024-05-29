@@ -2,5 +2,5 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://xxjastro.netlify.app/"
+    site: "https://xxjastroblog.netlify.app/rss.xml"
 });
