@@ -1,0 +1,19 @@
+---
+import Social from './Social.astro';
+
+---
+
+<footer>
+  <!-- <p>了解更多关于我的项目 <a href={`https://www.${platform}.com/${username}`}>{platform}</a>!</p> -->
+  了解更多关于我的项目：<Social platform="gitee" website="gitee.com/J-ycy" />
+  <Social platform="github" website="github.com/ycy1" />
+  <Social platform="astro" website="xxjastro.netlify.app" />
+</footer>
+
+<style>
+  footer {
+    display: flow;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+</style>
