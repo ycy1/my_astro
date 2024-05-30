@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: '我的第五篇博客文章'
+title: '我的第六篇博客文章'
 author: 'Astro 学习者'
 description: "测试新增rss 文章6"
 image:
