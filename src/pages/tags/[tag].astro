@@ -1,37 +1,28 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogPost from '../../components/BlogPost.astro';
-
+import { getCollection } from "astro:content";
 // 构建标签动态路由
 export async function getStaticPaths() {
-  const allPosts = await Astro.glob('../posts/*.md'); // 获取所有md文章
-  const uniqueTags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];  //获取所有标签并去重
+  const allPosts = await getCollection("posts"); // 获取所有md文章
+  
+  const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];  //获取所有标签并去重
   return uniqueTags.map((tag) => {
-    const filteredPosts = allPosts.filter((post) => post.frontmatter.tags.includes(tag));
+    const filteredPosts = allPosts.filter((post) => post.data.tags.includes(tag));
     return {
       params: { tag },  // 将标签作为参数传递给路由
       props: { posts: filteredPosts },  // 将过滤后的文章传递给组件
     };
   });
   
-//   return [
-//     { params: { tag: "astro" },props: {posts: allPosts} },
-//     { params: { tag: "successes" },props: {posts: allPosts} },
-//     { params: { tag: "community" },props: {posts: allPosts} },
-//     { params: { tag: "blogging" },props: {posts: allPosts} },
-//     { params: { tag: "setbacks" },props: {posts: allPosts} },
-//     { params: { tag: "learning in public" },props: {posts: allPosts} },
-//   ];
 }
 
 const { tag } = Astro.params;
 const { posts  } = Astro.props;
-// const filteredPosts = posts.filter((post) => post.frontmatter.tags?.includes(tag));
 ---
 <BaseLayout pageTitle={tag}>
   <p>包含「{tag}」标签的文章</p>
   <ul>
-    <!-- {filteredPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} pubDate={post.frontmatter.pubDate} />)} -->
-    {posts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} pubDate={post.frontmatter.pubDate} />)}
+    { posts.map((post) => <BlogPost url={`/posts/${post.slug}/`} title={post.data.title} pubDate={post.data.pubDate}/>) }
   </ul>
 </BaseLayout>

@@ -1,4 +1,15 @@
 ---
 const { title, url, pubDate } = Astro.props
+import FormattedDate from '../components/FormattedDate.astro';
 ---
-<li><a href={url}>{title}</a>            <span style="margin-left: 300px; color: rgb(128, 128, 128);">{pubDate.toString().slice(0,10)}</span></li>
+
+<li><a href={url}>{title}</a><span class="date"><FormattedDate date={pubDate}/></span></li>
+
+
+<style>
+    .date{
+        position: absolute;
+        left: 65%;
+        color: rgb(128, 128, 128);
+    }
+</style>
